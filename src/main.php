@@ -35,7 +35,7 @@
 
 function findInDataFile(array $offsets)
 {
-  $dataFile = __DIR__ . '/dict/data.noun';
+  $dataFile = __DIR__ . '/../dict/data.noun';
 
   try {
     $fp = fopen($dataFile, "r");
@@ -63,7 +63,7 @@ function findInDataFile(array $offsets)
 
 function readIndexFile(string $inputWord)
 {
-  $indexFile = __DIR__ . '/dict/index.noun';
+  $indexFile = __DIR__ . '/../dict/index.noun';
   $found = false;
 
   try {
