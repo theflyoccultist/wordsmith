@@ -73,10 +73,18 @@ function findInDataFile(array $offsets): array
   }
 }
 
-// TODO: remove print_r and replace with a nicely formatted output.
-function formatData(array $wordsArr)
+function formatData(string $inputWord, array $wordsArr)
 {
-  print_r($wordsArr);
+  $i = 1;
+  foreach ($wordsArr as $word) {
+    echo $i++ . ". " . $word->definition . PHP_EOL;
+
+    foreach ($word->words as $w) {
+      if ($w !== $inputWord) {
+        echo "\t- " . $w . PHP_EOL;
+      }
+    }
+  }
 }
 
 function readIndexFile(string $inputWord)
@@ -101,7 +109,7 @@ function readIndexFile(string $inputWord)
         echo $line . "\n";
 
         $results = findInDataFile($offsets);
-        formatData($results);
+        formatData($inputWord, $results);
         $found = true;
         break;
       }
