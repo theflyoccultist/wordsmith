@@ -126,7 +126,18 @@ function readIndexFile(string $inputWord, PartOfSpeech $partOfSpeech)
   }
 }
 
-$inputWord = readline('Enter a word: ');
+$short_options = "w:";
+$long_options = ["word:",];
+$options = getopt($short_options, $long_options);
+if (!$options) {
+  echo "Wordsmith is a command line tool for finding synonyms of a specific word." . PHP_EOL;
+  echo "Usage: w=word [options]" . PHP_EOL;
+  return;
+}
+
+if(isset($options["w"]) || isset($options["word"])) {
+    $inputWord = isset($options["w"]) ? $options["w"] : $options["word"];
+}
 
 foreach (PartOfSpeech::cases() as $part) {
   readIndexfile($inputWord, $part);

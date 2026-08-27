@@ -14,7 +14,7 @@
 
 ## Run:
 
-- `php -f src/main.php`
+- `php src/main.php -w=wonder`
 
 - Then, simply enter the word that you want informations about.
 
@@ -22,5 +22,5 @@
 
 - Support for French (currently it only supports English).
 
-- Thinking of different ways to have command options. I have two possibilities: an assistant that continuously asks questions, or passing command line arguments. Passing command line arguments is more likely to happen.
+- Passing command line arguments is now supported. Think of what different functionalities the CLI can have.
 
