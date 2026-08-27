@@ -14,9 +14,13 @@
 
 ## Run:
 
-- `php src/main.php -w=wonder`
+- `php src/main.php -w=wonder <Options>`
 
 - Then, simply enter the word that you want informations about.
+
+#### Optional Arguments:
+
+- `-d`: Shows the definition for each set of synonyms as well.
 
 ## Upcoming Tasks:
 

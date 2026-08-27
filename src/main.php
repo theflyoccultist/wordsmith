@@ -17,6 +17,34 @@ final readonly class Synset
   ) {}
 }
 
+$printDefinitions = false;
+
+$short_options = "w:d";
+$long_options = ["word:", "def"];
+$options = getopt($short_options, $long_options);
+if (!$options) {
+  echo "Wordsmith is a command line tool for finding synonyms of a specific word." . PHP_EOL;
+  echo "Usage: -w=wonder [options]" . PHP_EOL;
+  echo "The options are:" . PHP_EOL;
+  echo "\t -d \t Displays a detailed definition for each group of synonyms" . PHP_EOL;
+
+  return;
+}
+
+if (isset($options["w"]) || isset($options["word"])) {
+  $inputWord = isset($options["w"]) ? $options["w"] : $options["word"];
+}
+
+if (isset($options["d"]) || isset($options["def"])) {
+  $printDefinitions = true;
+}
+
+foreach (PartOfSpeech::cases() as $part) {
+  echo $part->value . PHP_EOL;
+  readIndexfile($inputWord, $part);
+}
+
+
 function parseSynsetWords(array $fields): array
 {
   $parsedWords = array();
@@ -75,10 +103,12 @@ function findInDataFile(array $offsets, PartOfSpeech $partOfSpeech): array
 
 function formatData(string $inputWord, array $wordsArr)
 {
+  global $printDefinitions;
   $i = 1;
   foreach ($wordsArr as $word) {
-    echo $word->partOfSpeech->value . PHP_EOL;
-    echo $i++ . ". " . $word->definition . PHP_EOL;
+    if ($printDefinitions) {
+      echo $i++ . ". " . $word->definition . PHP_EOL;
+    }
 
     foreach ($word->words as $w) {
       if ($w !== $inputWord) {
@@ -107,7 +137,7 @@ function readIndexFile(string $inputWord, PartOfSpeech $partOfSpeech)
         $offsets = array_slice($fields, -$numofSynsets);
 
         echo "Word $inputWord was found\n";
-        echo $line . "\n";
+        /* echo $line . "\n"; */
 
         $results = findInDataFile($offsets, $partOfSpeech);
         formatData($inputWord, $results);
@@ -125,21 +155,3 @@ function readIndexFile(string $inputWord, PartOfSpeech $partOfSpeech)
     echo "An error occured: " . $e->getMessage();
   }
 }
-
-$short_options = "w:";
-$long_options = ["word:",];
-$options = getopt($short_options, $long_options);
-if (!$options) {
-  echo "Wordsmith is a command line tool for finding synonyms of a specific word." . PHP_EOL;
-  echo "Usage: w=word [options]" . PHP_EOL;
-  return;
-}
-
-if(isset($options["w"]) || isset($options["word"])) {
-    $inputWord = isset($options["w"]) ? $options["w"] : $options["word"];
-}
-
-foreach (PartOfSpeech::cases() as $part) {
-  readIndexfile($inputWord, $part);
-}
-
