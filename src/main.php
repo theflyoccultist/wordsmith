@@ -1,11 +1,11 @@
 <?php
 
-enum PartOfSpeech
+enum PartOfSpeech: string
 {
-  case Noun;
-  case Verb;
-  case Adjective;
-  case Adverb;
+  case Noun = "noun";
+  case Verb = "verb";
+  case Adjective = "adj";
+  case Adverb = "adv";
 }
 
 final readonly class Synset
@@ -40,9 +40,9 @@ function parseSynsetDefinition(array $fields): string
   return $definition;
 }
 
-function findInDataFile(array $offsets): array
+function findInDataFile(array $offsets, PartOfSpeech $partOfSpeech): array
 {
-  $dataFile = __DIR__ . '/../dict/data.noun';
+  $dataFile = __DIR__ . '/../dict/data.' . $partOfSpeech->value;
 
   try {
     $fp = fopen($dataFile, "r");
@@ -57,7 +57,7 @@ function findInDataFile(array $offsets): array
       foreach ($offsets as $offset) {
         if ($fields[0] == $offset) {
           $wordsArr[] = new Synset(
-            partOfSpeech: PartOfSpeech::Noun,
+            partOfSpeech: $partOfSpeech,
             words: parseSynsetWords($fields),
             definition: parseSynsetDefinition($fields),
           );
@@ -77,6 +77,7 @@ function formatData(string $inputWord, array $wordsArr)
 {
   $i = 1;
   foreach ($wordsArr as $word) {
+    echo $word->partOfSpeech->value . PHP_EOL;
     echo $i++ . ". " . $word->definition . PHP_EOL;
 
     foreach ($word->words as $w) {
@@ -87,9 +88,9 @@ function formatData(string $inputWord, array $wordsArr)
   }
 }
 
-function readIndexFile(string $inputWord)
+function readIndexFile(string $inputWord, PartOfSpeech $partOfSpeech)
 {
-  $indexFile = __DIR__ . '/../dict/index.noun';
+  $indexFile = __DIR__ . '/../dict/index.' . $partOfSpeech->value;
   $found = false;
 
   try {
@@ -108,7 +109,7 @@ function readIndexFile(string $inputWord)
         echo "Word $inputWord was found\n";
         echo $line . "\n";
 
-        $results = findInDataFile($offsets);
+        $results = findInDataFile($offsets, $partOfSpeech);
         formatData($inputWord, $results);
         $found = true;
         break;
@@ -125,6 +126,9 @@ function readIndexFile(string $inputWord)
   }
 }
 
-
 $inputWord = readline('Enter a word: ');
-readIndexfile($inputWord);
+
+foreach (PartOfSpeech::cases() as $part) {
+  readIndexfile($inputWord, $part);
+}
+

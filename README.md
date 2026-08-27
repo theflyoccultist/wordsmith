@@ -4,6 +4,10 @@
 
 - The WordNet data files, which is used by this tool, is contained in the `dict/` directory, to minimize dependencies.
 
+## Features:
+
+- Support for Nouns, Verbs, Adjectives and Adverbs.
+
 ## Requirements:
 
 - A recent version of PHP (PHP 8.2~)
@@ -16,8 +20,7 @@
 
 ## Upcoming Tasks:
 
-- Support for Verbs, Adjective and Adverb (currently it only works with Nouns).
 - Support for French (currently it only supports English).
 
-- Thinking of different ways to have command options. I have two possibilities: an assistant that continuously asks questions, or passing command line arguments.
+- Thinking of different ways to have command options. I have two possibilities: an assistant that continuously asks questions, or passing command line arguments. Passing command line arguments is more likely to happen.
 
