@@ -7,6 +7,7 @@
 ## Features:
 
 - Support for Nouns, Verbs, Adjectives and Adverbs.
+- Use command line arguments to search for synonyms of a word. Use the `-w=` or `--word=` argument when running the script, followed by the wanted word.
 
 ## Requirements:
 
@@ -25,6 +26,4 @@
 ## Upcoming Tasks:
 
 - Support for French (currently it only supports English).
-
-- Passing command line arguments is now supported. Think of what different functionalities the CLI can have.
 
