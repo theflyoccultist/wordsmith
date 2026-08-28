@@ -11,13 +11,18 @@
 
 ## Requirements:
 
-- A recent version of PHP (PHP 8.2~)
+- A recent version of PHP (PHP 8+)
+- A recent version of Composer
 
 ## Run:
 
-- `php src/main.php -w=wonder <Options>`
+- In the project folder:
 
-- Then, simply enter the word that you want informations about.
+- `./bin/wordsmith -w=wonder <Options>`
+
+- To have it available in your bash shell;
+
+- `composer install`
 
 #### Optional Arguments:
 

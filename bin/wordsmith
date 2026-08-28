@@ -1,0 +1,35 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../src/WordNet.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+use Wordsmith\WordNet;
+
+$wordNet = new WordNet();
+
+$inputWord = "";
+$printDefinitions = false;
+
+$short_options = "w:dh";
+$long_options = ["word:", "def", "help"];
+$options = getopt($short_options, $long_options);
+if (!$options) {
+  $wordNet->printHelp();
+  return;
+}
+
+if (isset($options["w"]) || isset($options["word"])) {
+  $inputWord = isset($options["w"]) ? $options["w"] : $options["word"];
+}
+
+if (isset($options["d"]) || isset($options["def"])) {
+  $printDefinitions = true;
+}
+
+if (isset($options["h"]) || isset($options["help"])) {
+  $wordNet->printHelp();
+  return;
+}
+
+$wordNet->printResults($inputWord);
