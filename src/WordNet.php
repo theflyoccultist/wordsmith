@@ -59,7 +59,7 @@ final class WordNet
           $numofSynsets = $fields[2];
           $offsets = array_slice($fields, -$numofSynsets);
 
-          echo "Word $inputWord was found\n";
+          /* echo "Word $inputWord was found\n"; */
           /* echo $line . "\n"; */
 
           $results = $this->findinDataFile($offsets, $partOfSpeech);
@@ -70,7 +70,7 @@ final class WordNet
       }
 
       if (!$found) {
-        echo "Word $inputWord was not found\n";
+        echo "word \"$inputWord\" was not found\n";
       }
 
       fclose($f);
@@ -82,24 +82,25 @@ final class WordNet
   function printData(string $inputWord, array $wordsArr)
   {
     global $printDefinitions;
-    $i = 1;
     foreach ($wordsArr as $word) {
       if ($printDefinitions) {
-        echo $i++ . ". " . $word->definition . PHP_EOL;
+        echo $word->definition . PHP_EOL;
       }
 
       foreach ($word->words as $w) {
         if ($w !== $inputWord) {
-          echo "\t- " . $w . PHP_EOL;
+          echo "\t" . $w . PHP_EOL;
         }
       }
+
+      echo "\n";
     }
   }
 
   function printResults(string $inputWord)
   {
     foreach (PartOfSpeech::cases() as $part) {
-      echo $part->value . PHP_EOL;
+      echo "\n\033[33m" . strtoupper($part->value) . "\n\033[0m" . PHP_EOL;
       $this->findinindexfile($inputWord, $part);
     }
   }
