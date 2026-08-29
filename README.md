@@ -20,7 +20,13 @@
 
 ## tests:
 
-- `phpunit tests/wordsmithtests.php`
+- Test the application:
+
+```bash
+cd tests
+./wordsmithtest
+
+```
 
 ## run:
 

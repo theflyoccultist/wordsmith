@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+set -e
+
+output=$(php ../bin/wordsmith -w wonder -d)
+
+echo "$output" | grep -q "wonder"
+
+output=$(php ../bin/wordsmith -w wonder)
+
+echo "$output" | grep -q "marvel"
+
+echo "CLI tests passed"
