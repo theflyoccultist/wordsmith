@@ -1,34 +1,35 @@
-# Wordsmith
+# wordsmith
 
-- I was working on some writing and suddenly thought about a project idea, where I could use the features of PHP, language that I am getting familiar with these days. The idea was a command line tool to look for synonyms of a specific word, along with a definition.
+- i was working on some writing and suddenly thought about a project idea, where i could use the features of php, language that i am getting familiar with these days. the idea was a command line tool to look for synonyms of a specific word, along with a definition.
 
-- The WordNet data files, which is used by this tool, is contained in the `dict/` directory, to minimize dependencies.
+- the wordnet data files, which is used by this tool, is contained in the `dict/` directory, to minimize dependencies.
 
-## Features:
+## features:
 
-- Support for Nouns, Verbs, Adjectives and Adverbs.
-- Use command line arguments to search for synonyms of a word. Use the `-w=` or `--word=` argument when running the script, followed by the wanted word.
+- support for nouns, verbs, adjectives and adverbs.
+- use command line arguments to search for synonyms of a word. use the `-w=` or `--word=` argument when running the script, followed by the wanted word.
 
-## Requirements:
+### optional arguments:
 
-- A recent version of PHP (PHP 8+)
-- A recent version of Composer
+- `-d`: shows the definition for each set of synonyms as well.
 
-## Run:
+## requirements:
 
-- In the project folder:
+- a recent version of php (php 8+)
+- a recent version of composer
 
-- `./bin/wordsmith -w=wonder <Options>`
+## tests:
 
-- To have it available in your bash shell;
+- `phpunit tests/wordsmithtests.php`
+
+## run:
+
+- configure & build:
 
 - `composer install`
 
-#### Optional Arguments:
+- in the project folder:
 
-- `-d`: Shows the definition for each set of synonyms as well.
+- `./bin/wordsmith -w=wonder <options>`
 
-## Upcoming Tasks:
-
-- Support for French (currently it only supports English).
 
