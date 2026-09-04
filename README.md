@@ -32,10 +32,15 @@ cd tests
 
 - configure & build:
 
-- `composer install`
+```bash
+composer install
+```
 
-- in the project folder:
+- do a test run:
 
-- `./bin/wordsmith -w=wonder <options>`
+```bash
+./bin/wordsmith -w=wonder -d
+```
+
 
 

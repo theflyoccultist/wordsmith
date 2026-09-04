@@ -41,6 +41,14 @@ final class WordNet
     }
   }
 
+  function printResults(string $inputWord)
+  {
+    foreach (PartOfSpeech::cases() as $part) {
+      echo "\n\033[33m" . strtoupper($part->value) . "\n\033[0m" . PHP_EOL;
+      $this->findinindexfile($inputWord, $part);
+    }
+  }
+
   function findinIndexFile(string $inputWord, PartOfSpeech $partOfSpeech)
   {
     $indexFile = __DIR__ . '/../dict/index.' . $partOfSpeech->value;
@@ -94,14 +102,6 @@ final class WordNet
       }
 
       echo "\n";
-    }
-  }
-
-  function printResults(string $inputWord)
-  {
-    foreach (PartOfSpeech::cases() as $part) {
-      echo "\n\033[33m" . strtoupper($part->value) . "\n\033[0m" . PHP_EOL;
-      $this->findinindexfile($inputWord, $part);
     }
   }
 
